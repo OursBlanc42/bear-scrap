@@ -13,7 +13,7 @@ async function loadProjects() {
     const csvText = await response.text();
     const projects = parseCSV(csvText);
 
-    // Afficher les projets
+    // Display the projects
     projectsGrid.innerHTML = projects
       .map(
         (project) => `
