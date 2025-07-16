@@ -31,7 +31,7 @@ start_time = time.time()
 config = configparser.ConfigParser()
 # Get the directory of the current script and build the path to config
 script_dir = os.path.dirname(os.path.abspath(__file__))
-config_path = os.path.join(os.path.dirname(script_dir), 'data', 'config')
+config_path = os.path.join(script_dir, 'config')
 config.read(config_path)
 email = config.get('credential', 'email')
 password = config.get('credential', 'password')
@@ -241,6 +241,7 @@ finally:
 
     # Write the timestamp in a file
     timestamp_path = os.path.join(
-        os.path.dirname(script_dir), 'data', 'last_update.txt')
+        os.path.dirname(script_dir), 'web', 'last_update.txt'
+    )
     with open(timestamp_path, "w") as f:
         f.write(datetime.now().strftime("%d-%m-%Y %H:%M:%S"))

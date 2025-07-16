@@ -5,7 +5,7 @@ async function loadProjects() {
 
   try {
     // Charger les données du CSV
-    const response = await fetch("../data/list.csv");
+    const response = await fetch("list.csv");
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -104,7 +104,7 @@ function updateStats(projects) {
 
 async function loadLastUpdateDate() {
   try {
-    const response = await fetch("../data/last_update.txt");
+    const response = await fetch("last_update.txt");
     if (response.ok) {
       const lastUpdateText = await response.text();
       document.getElementById("lastUpdate").textContent = lastUpdateText.trim();
