@@ -16,7 +16,7 @@
    ========================================================================== */
 body {
     font-family: 'Arial', sans-serif;
-    font-size: 12px;
+    font-size: 14px;
     margin: 0;
     padding: 0;
     background-color: var(--background-color);
@@ -51,6 +51,22 @@ header p {
     margin: 0.5rem 0 0 0;
     color: var(--light-color);
     font-size: 1.2rem;
+}
+
+header a {
+    color: var(--primary-color);
+    background-color: var(--light-color);
+    padding: 0.2rem 0.4rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.4s ease;
+}
+
+header a:hover {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    transform: translateY(-4px);
 }
 
 /* ==========================================================================
