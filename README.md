@@ -133,6 +133,7 @@ Apparently, LinkedIn doesn't really like it when you make a lot of requests like
 - Minor improvements
 - Refactorize code
 - Optimize execution time of main.py
+- Dockerize
 
 ## License
 
