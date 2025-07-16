@@ -98,7 +98,7 @@ function updateStats(projects) {
   // Update the number of projects
   document.getElementById("totalProjects").textContent = totalProjects;
 
-  // Mettre à jour la date de dernière mise à jour depuis le fichier
+  // Update the last update date from the file
   loadLastUpdateDate();
 }
 
