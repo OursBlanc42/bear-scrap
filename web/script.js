@@ -4,7 +4,7 @@ async function loadProjects() {
   const projectsGrid = document.getElementById("projectsGrid");
 
   try {
-    // Charger les données du CSV
+    // Load the CSV data
     const response = await fetch("../data/list.csv");
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
