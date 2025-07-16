@@ -1,184 +1,110 @@
-// Script pour charger et afficher les données des projets
-document.addEventListener("DOMContentLoaded", function () {
-  loadProjects();
-});
+document.addEventListener("DOMContentLoaded", loadProjects);
 
 async function loadProjects() {
   const projectsGrid = document.getElementById("projectsGrid");
-  const totalProjectsElement = document.getElementById("totalProjects");
-  const totalLinksElement = document.getElementById("totalLinks");
-  const lastUpdateElement = document.getElementById("lastUpdate");
 
   try {
-    // Afficher l'état de chargement
-    projectsGrid.innerHTML =
-      '<div class="loading">Chargement des projets...</div>';
-
     // Charger les données du CSV
     const response = await fetch("../list.csv");
-    const csvText = await response.text();
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
 
-    // Parser le CSV
+    const csvText = await response.text();
     const projects = parseCSV(csvText);
 
-    if (projects.length === 0) {
-      projectsGrid.innerHTML = `
-                <div class="empty-state">
-                    <h3>Aucun projet trouvé</h3>
-                    <p>Lancez le script de scraping pour découvrir les projets !</p>
-                </div>
-            `;
-      return;
-    }
-
     // Afficher les projets
-    displayProjects(projects);
+    projectsGrid.innerHTML = projects
+      .map(
+        (project) => `
+        <tr>
+          <td class="day-cell">Jour ${project.day}</td>
+          <td class="title-cell">${project.title}</td>
+          <td class="description-cell">${project.description}</td>
+          <td class="links-cell">
+            ${
+              project.link1 &&
+              project.link1 !== "none" &&
+              project.link1 !== "null"
+                ? `<a href="${project.link1}" target="_blank">Projet</a>`
+                : ""
+            }
+            ${
+              project.link2 &&
+              project.link2 !== "none" &&
+              project.link2 !== "null"
+                ? `<a href="${project.link2}" target="_blank">En savoir plus</a>`
+                : ""
+            }
+            ${
+              project.link3 &&
+              project.link3 !== "none" &&
+              project.link3 !== "null"
+                ? `<a href="${project.link3}" target="_blank">Soutenir</a>`
+                : ""
+            }
+          </td>
+        </tr>
+      `
+      )
+      .join("");
 
     // Mettre à jour les statistiques
-    updateStats(
-      projects,
-      totalProjectsElement,
-      totalLinksElement,
-      lastUpdateElement
-    );
+    updateStats(projects);
   } catch (error) {
     console.error("Erreur lors du chargement des données:", error);
-    projectsGrid.innerHTML = `
-            <div class="empty-state">
-                <h3>Erreur de chargement</h3>
-                <p>Impossible de charger les données. Vérifiez que le fichier CSV existe.</p>
-            </div>
-        `;
+    projectsGrid.innerHTML =
+      "<tr><td colspan='4'>Erreur de chargement des données.</td></tr>";
   }
 }
 
+// To avoid problem with quotes and comma in descriptions, we use a simple CSV parser
+// The first two columns, then lasts columns, and the description is everything in between
 function parseCSV(csvText) {
   const lines = csvText.trim().split("\n");
-  const projects = [];
+  return (
+    lines
+      .map((line) => {
+        // Simple parsing
+        const parts = line.split(",");
+        if (parts.length < 5) return null; // Il faut au moins 5 colonnes (jour, titre, description, 3 liens)
 
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i].trim();
-    if (!line) continue;
+        const day = parts[0].trim();
+        const title = parts[1].trim();
 
-    // Parser la ligne CSV (gestion basique des guillemets)
-    const columns = parseCSVLine(line);
+        // Last columns are links
+        const link1 = parts[parts.length - 3].trim();
+        const link2 = parts[parts.length - 2].trim();
+        const link3 = parts[parts.length - 1].trim();
 
-    if (columns.length >= 5) {
-      projects.push({
-        day: columns[0],
-        title: columns[1],
-        linksProject: columns[2],
-        linksMore: columns[3],
-        linksSupport: columns[4],
-      });
-    }
-  }
+        // Description is everything in between the first two columns and the last three
+        const description = parts
+          .slice(2, -3)
+          .join(",")
+          .trim()
+          .replace(/^"|"$/g, "");
 
-  // Trier par jour (numérique)
-  projects.sort((a, b) => parseInt(b.day) - parseInt(a.day));
-
-  return projects;
+        return { day, title, description, link1, link2, link3 };
+      })
+      // remove empty lines
+      .filter((project) => project && project.day && project.title)
+      .sort((a, b) => parseInt(b.day) - parseInt(a.day))
+  );
 }
 
-function parseCSVLine(line) {
-  const columns = [];
-  let current = "";
-  let inQuotes = false;
+function updateStats(projects) {
+  const totalProjects = projects.length;
 
-  for (let i = 0; i < line.length; i++) {
-    const char = line[i];
+  // Mettre à jour le nombre de logiciels
+  document.getElementById("totalProjects").textContent = totalProjects;
 
-    if (char === '"' && (i === 0 || line[i - 1] === ",")) {
-      inQuotes = true;
-    } else if (
-      char === '"' &&
-      inQuotes &&
-      (i === line.length - 1 || line[i + 1] === ",")
-    ) {
-      inQuotes = false;
-    } else if (char === "," && !inQuotes) {
-      columns.push(current.trim());
-      current = "";
-    } else {
-      current += char;
-    }
-  }
-
-  columns.push(current.trim());
-  return columns;
-}
-
-function displayProjects(projects) {
-  const projectsGrid = document.getElementById("projectsGrid");
-
-  projectsGrid.innerHTML = projects
-    .map(
-      (project) => `
-        <div class="project-card">
-            <div class="project-header">
-                <span class="project-day">Jour ${project.day}</span>
-                <h3 class="project-title">${escapeHtml(project.title)}</h3>
-            </div>
-            <div class="project-links">
-                ${
-                  project.linksProject
-                    ? `<a href="${project.linksProject}" class="project-link" target="_blank" rel="noopener">Projet</a>`
-                    : ""
-                }
-                ${
-                  project.linksMore
-                    ? `<a href="${project.linksMore}" class="project-link more-link" target="_blank" rel="noopener">En savoir plus</a>`
-                    : ""
-                }
-                ${
-                  project.linksSupport
-                    ? `<a href="${project.linksSupport}" class="project-link support-link" target="_blank" rel="noopener">Soutenir</a>`
-                    : ""
-                }
-            </div>
-        </div>
-    `
-    )
-    .join("");
-}
-
-function updateStats(
-  projects,
-  totalProjectsElement,
-  totalLinksElement,
-  lastUpdateElement
-) {
-  // Compter le nombre total de projets
-  totalProjectsElement.textContent = projects.length;
-
-  // Compter le nombre total de liens
-  let totalLinks = 0;
-  projects.forEach((project) => {
-    if (project.linksProject) totalLinks++;
-    if (project.linksMore) totalLinks++;
-    if (project.linksSupport) totalLinks++;
-  });
-  totalLinksElement.textContent = totalLinks;
-
-  // Afficher la date de dernière mise à jour
+  // Mettre à jour la date de dernière mise à jour
   const now = new Date();
-  const options = {
-    year: "numeric",
-    month: "long",
+  const lastUpdate = now.toLocaleDateString("fr-FR", {
     day: "numeric",
+    month: "long",
     hour: "2-digit",
     minute: "2-digit",
-  };
-  lastUpdateElement.textContent = now.toLocaleDateString("fr-FR", options);
-}
-
-function escapeHtml(text) {
-  const div = document.createElement("div");
-  div.textContent = text;
-  return div.innerHTML;
-}
-
-// Fonction pour rafraîchir les données
-function refreshData() {
-  loadProjects();
+  });
+  document.getElementById("lastUpdate").textContent = lastUpdate;
 }
