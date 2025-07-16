@@ -1,0 +1,275 @@
+:root {
+    --primary-color: #ff6b6b;
+    --secondary-color: #45b7d1;
+    --tertiary-color: #4ecdc4;
+    --background-color: #fff8e1;
+    --text-color: #333;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+header {
+    background-color: var(--tertiary-color);
+    padding: 2rem 0;
+    text-align: center;
+}
+
+header div {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    color: white;
+}
+
+header p {
+    margin: 0.5rem 0 0 0;
+    font-size: 1.2rem;
+}
+
+main {
+    padding: 2rem 0;
+    max-width: 800px;
+    margin: 0 auto;
+    min-height: 60vh;
+    padding-bottom: 8rem;
+}
+
+section {
+    margin-bottom: 2rem;
+}
+
+section h2 {
+    color: var(--secondary-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+#projectsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.stat-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.stat-card h3 {
+    margin-top: 0;
+    color: var(--secondary-color);
+}
+
+/* Footer avec SVG animé */
+footer {
+    width: 100vw;
+    position: fixed;
+    bottom: 0px;
+    margin-left: calc(50% - 50vw);
+}
+
+footer svg {
+    width: 100%;
+    height: auto;
+}
+
+.footer-content {
+    background-color: var(--tertiary-color);
+    margin: -5px 0px 0px 0px;
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+.footer-content p {
+    margin: 0 0 20px 0;
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu__item {
+    margin: 0 10px;
+}
+
+.menu__link {
+    font-size: 1.2rem;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: 0.5s;
+    text-decoration: none;
+    opacity: 0.8;
+    font-weight: 300;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.menu__link:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.menu__link svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* Animations SVG */
+.arrow {
+    stroke-width: 0.3px;
+    stroke: yellow;
+}
+
+.topball {
+    animation: ball 1.5s ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-delay: 0.3s;
+    cursor: pointer;
+}
+
+.wave {
+    animation: wave 3s linear;
+    animation-iteration-count: infinite;
+    fill: var(--tertiary-color);
+}
+
+.drop {
+    fill: transparent;
+    animation: drop 5s ease infinite normal;
+    stroke: var(--tertiary-color);
+    stroke-width: 0.5;
+    opacity: 0.6; 
+    transform: translateY(80%);
+}
+
+.drop1 {
+    transform-origin: 20px 3px;
+}
+
+.drop2 {
+    animation-delay: 3s;
+    animation-duration: 3s;
+    transform-origin: 25px 3px;
+}
+
+.drop3 {
+    animation-delay: -2s;
+    animation-duration: 3.4s;
+    transform-origin: 16px 3px;
+}
+
+.gooeff {
+    filter: url(#goo);
+}
+
+#wave2 {
+    animation-duration: 5s;
+    animation-direction: reverse;
+    opacity: 0.6;
+}
+
+#wave3 {
+    animation-duration: 7s;
+    opacity: 0.3;
+}
+
+@keyframes drop {
+    0% {
+        transform: translateY(80%); 
+        opacity: 0.6; 
+    }
+    80% {
+        transform: translateY(80%); 
+        opacity: 0.6; 
+    }
+    90% { 
+        transform: translateY(10%); 
+        opacity: 0.6; 
+    }
+    100% { 
+        transform: translateY(0%) scale(1.5);  
+        stroke-width: 0.2;
+        opacity: 0; 
+    }
+}
+
+@keyframes wave {
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes ball {
+    to {
+        transform: translateY(20%);
+    }
+}
+
+/* Responsive pour le footer */
+@media (max-width: 768px) {
+    .footer-content {
+        padding: 15px;
+    }
+    
+    .menu {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .menu__item {
+        margin: 5px 0;
+    }
+
+    .menu__link {
+        font-size: 1rem;
+        padding: 0.75rem 1.5rem;
+    }
+    
+    main {
+        padding-bottom: 10rem;
+    }
+}
