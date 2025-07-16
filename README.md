@@ -1,17 +1,38 @@
 # Bear-Scrap
 ## Presentation
-
-Bearstech, société spécialisé dans l'hébergement et infogérance publie chaque jour pendant tout l'été des posts sur Linkedin pour présenter un logiciel libre.
-L'initiative est trop cool, mais c'est pas toujours simple de retrouver ces posts sur LinkedIn et d'en garder une trace.
-Etant libriste, en reconversion dans l'informatique et ayant "OursBlanc" comme pseudo, je me devais de faire quelque chose !
+Bearstech, a company specializing in hosting and IT management, publishes a post on LinkedIn every day throughout the summer to showcase free software. The initiative is really cool, but it's not always easy to find these posts on LinkedIn and keep track of them. Being a free software enthusiast, transitioning into IT, and having "OursBlanc" as my nickname, I had to do something about it!
 
 ## Idea
-Créer un systeme de scrapping pour récupérer chaque logiciel présenté dans ces posts, et les afficher en statique sur une page web afin de garder une trace et de les retrouver facilement.
+Create a scraping system to retrieve each software presented in these posts and display them statically on a web page to keep a record and find them easily.
 
+I have just completed a year of retraining in IT, so please forgive any minor deviations from best practices as I may not yet have all the instincts and still have much to learn.
+
+## How it works?
+I wanted to use an API to scrape posts from the Bearstech page, but it seems it's not possible to scrape company pages that way. So, I used Selenium to scrape the page "like a human."
+
+The operation is quite simple:
+There is a CSV file that records the posts from the Bearstech page. (Given that there normally won't be a huge number of entries, I preferred using a .csv over a real database.)
+
+We log in to LinkedIn using the credentials contained in the config file, then we go to the Bearstech page, scroll through the posts, and when we come across a post titled "Les logiciels libres de l'été," we expand the post, scrape it using a regex, and set it aside (unless that post is already in the .csv). Once we reach the "Logiciel de l'été jour 1" (the first one), we stop there and save everything in the .csv.
+
+## Installation
+Download the repository
+setup the env
+launch the script
+wait approx 2 minutes
+
+then launch the index.html and "voila" you have a webpage with nice formating
+
+### Deployment
+I've self hosted the project here, with a cron task, i schedule each day at 1:00 the scan of linkedin to continuously populate the page
+
+
+## Improvement
+La logique algorithmique peut certainement être amélioré (j'ai essayé d'optimiser ça mais j'ai pas réussi à trouver un moyen de limiter le nombre de boucle avec Selenium qui rescan tous les posts à chaque fois... Dans l'idéal il faudrait scanner que les nouveaux poste une fois qu'on a scrollé et afficher de nouvelles publications
 
 ## License
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
-
 ## Made with love
-J'ai fait ça moi même avec mes pates d'ours . C'est un petit projet perso pour peupler mon github et m'aider dans ma recherche d'emploi.
+I made this myself with my bear paws. It's a small personal project to populate my GitHub and help in my job search.
+
