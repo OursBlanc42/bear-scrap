@@ -22,7 +22,7 @@ def main():
             print("Appuyez sur Ctrl+C pour arrêter le serveur")
             httpd.serve_forever()
     except KeyboardInterrupt:
-        print("\nServeur arrêté.")
+        print("\nServer stopped.")
         sys.exit(0)
 
 
