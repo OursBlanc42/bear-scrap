@@ -8,6 +8,7 @@ Returns:
 """
 
 import csv
+import os
 
 
 def read_csv():
@@ -17,7 +18,11 @@ def read_csv():
     # Try to read the CSV file then check if it exists
     # If it does, read the 'day' field from each row and add it to the set
     try:
-        with open("list.csv", "r") as f:
+        # Get the directory of the current script and build the path to CSV
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        csv_path = os.path.join(os.path.dirname(script_dir), 'data', 'list.csv')
+        
+        with open(csv_path, "r") as f:
             reader = csv.reader(f)
             for row in reader:
                 if len(row) >= 1:

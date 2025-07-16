@@ -5,7 +5,7 @@ async function loadProjects() {
 
   try {
     // Charger les données du CSV
-    const response = await fetch("../list.csv");
+    const response = await fetch("../data/list.csv");
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

@@ -1,15 +1,22 @@
+/* ==========================================================================
+   VARIABLES CSS
+   ========================================================================== */
 :root {
     --primary-color: #ff6b6b;
     --secondary-color: rgb(74, 188, 194);
     --background-color: #fff8e1;
     --text-color: #333;
     --card-background-color: #f9f9f9;
-    --card-border-color: #ddd;
     --light-color: #fff;
+    --border-color: #c1c1c1;
 }
 
+/* ==========================================================================
+   BASE STYLES
+   ========================================================================== */
 body {
     font-family: 'Arial', sans-serif;
+    font-size: 12px;
     margin: 0;
     padding: 0;
     background-color: var(--background-color);
@@ -17,22 +24,21 @@ body {
     overflow-x: hidden;
 }
 
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
 header {
     background-color: var(--secondary-color);
-    padding: 2rem 0 0 0;
+    padding: 2rem 0;
     text-align: center;
-    position: relative;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     border-radius: 0 0 1000px 1000px / 0 0 25px 25px;
 }
-
 
 header div {
     max-width: 800px;
     margin: 0 auto;
     padding-bottom: 2rem;
-    position: relative;
-    z-index: 3;
 }
 
 header h1 {
@@ -43,10 +49,13 @@ header h1 {
 
 header p {
     margin: 0.5rem 0 0 0;
-      color: var(--light-color);
+    color: var(--light-color);
     font-size: 1.2rem;
 }
 
+/* ==========================================================================
+   MAIN CONTENT
+   ========================================================================== */
 main {
     padding: 2rem 0;
     max-width: 800px;
@@ -54,7 +63,7 @@ main {
     min-height: 60vh;
     padding-bottom: 5rem;
     position: relative;
-    z-index: 10;
+    z-index: 2;
 }
 
 section {
@@ -67,6 +76,9 @@ section h2 {
     padding-bottom: 0.5rem;
 }
 
+/* ==========================================================================
+   LINKS
+   ========================================================================== */
 a {
     color: var(--primary-color);
     text-decoration: none;
@@ -77,6 +89,9 @@ a:hover {
     text-decoration: underline;
 }
 
+/* ==========================================================================
+   TABLE STYLES
+   ========================================================================== */
 .table-container {
     overflow-x: auto;
     margin-bottom: 2rem;
@@ -85,7 +100,7 @@ a:hover {
 .projects-table {
     width: 100%;
     border-collapse: collapse;
-    background-color: var(--light-color);
+    background-color: var(--card-background-color);
     border-radius: 8px;
     overflow: hidden;
 }
@@ -100,7 +115,7 @@ a:hover {
 
 .projects-table td {
     padding: 1rem;
-    border-bottom: 1px solid var(--card-border-color);
+    border-bottom: 1px solid var(--border-color);
     vertical-align: top;
 }
 
@@ -119,20 +134,23 @@ a:hover {
     line-height: 1.4;
 }
 
-/* Utilisation du même style que les liens du footer */
+/* ==========================================================================
+   BUTTON STYLES (liens dans le tableau)
+   ========================================================================== */
 .links-cell a {
     display: inline-block;
     margin-right: 0.5rem;
     margin-bottom: 0.5rem;
-    padding: 0.5rem 1rem;
+    padding: 0.3rem 0.6rem;
     color: var(--light-color);
     text-decoration: none;
     border-radius: 25px;
     background-color: var(--secondary-color);
-    font-size: 0.9rem;
-    font-weight: 300;
     transition: 0.3s ease;
+    font-weight: 300;
+    font-size: 0.75rem;
     opacity: 0.9;
+    white-space: nowrap;
 }
 
 .links-cell a:hover {
@@ -141,7 +159,9 @@ a:hover {
     transform: translateY(-2px);
 }
 
-
+/* ==========================================================================
+   STATISTICS CARDS
+   ========================================================================== */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -152,10 +172,9 @@ a:hover {
 
 .stat-card {
     background-color: var(--card-background-color);
-    border: 1px solid var(--card-border-color);
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     text-align: center;
 }
 
@@ -164,22 +183,49 @@ a:hover {
     color: var(--secondary-color);
 }
 
-/* Footer avec SVG animé */
-footer {
-    width: 100vw;
+/* ==========================================================================
+   FOOTER & WAVES
+   ========================================================================== */
+
+/* Footer avec vagues arrière-plan */
+#footer-back {
     position: fixed;
-    bottom: 0px;
-    margin-left: calc(50% - 50vw);
+    left: 0;
+    right: 0;
+    bottom: 40px;
     z-index: 1;
+}
+
+/* Footer avec vague avant et contenu */
+#footer-front {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    pointer-events: none;
 }
 
 footer svg {
     width: 100%;
     height: auto;
     pointer-events: none;
+    display: block;
+    margin: 0;
 }
 
-footer a {
+.footer-content {
+    background-color: var(--secondary-color);
+    padding: 10px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--light-color);
+    text-align: center;
+    pointer-events: auto;
+    margin: 0;
+}
+
+.footer-content a {
     color: var(--primary-color);
     background-color: var(--light-color);
     padding: 0.2rem 0.4rem;
@@ -189,68 +235,15 @@ footer a {
     transition: 0.4s ease;
 }
 
-footer a:hover {
+.footer-content a:hover {
     background-color: var(--primary-color);
     color: var(--light-color);
     transform: translateY(-4px);
 }
 
-.footer-content {
-    background-color: var(--secondary-color);
-    margin: -5px 0px 0px 0px;
-    padding: 10px;
-    color: var(--light-color);
-    text-align: center;
-}
-
-.footer-content p {
-    margin: 10px;
-    font-size: 0.8rem;
-    font-weight: bold;
-}
-
-.menu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.menu__item {
-    margin: 0 10px;
-}
-
-.menu__link {
-    font-size: 0.9rem;
-    color: var(--light-color);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: 0.3s ease;
-    text-decoration: none;
-    opacity: 0.9;
-    font-weight: 300;
-    padding: 0.5rem 1rem;
-    border-radius: 25px;
-    background: rgba(0, 0, 0, 0.2);
-    position: relative;
-}
-
-.menu__link:hover {
-    opacity: 1;
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
-}
-
-.menu__link svg {
-    width: 14px;
-    height: 14px;
-    z-index: 2;
-}
-
+/* ==========================================================================
+   ANIMATIONS
+   ========================================================================== */
 @keyframes wave {
     to {
         transform: translateX(-100%);
@@ -258,33 +251,36 @@ footer a:hover {
 }
 
 .wave {
-    animation: wave 3s linear;
-    animation-iteration-count: infinite;
-    fill: rgba(74, 188, 194, 1);
+    animation: wave 4s linear infinite;
+    fill: var(--secondary-color);
 }
 
+#wave0 {
+    fill: var(--secondary-color);
+}
 
 #wave1 {
-    fill: rgba(74, 188, 194, 1);
+    animation-duration: 5s;
+    animation-direction: reverse;
+    opacity: 0.5;
 }
 
 #wave2 {
-    animation-duration: 5s;
+    animation-duration: 7s;
     animation-direction: reverse;
     opacity: 0.6;
-    fill: rgba(74, 188, 194, 0.7);
 }
 
 #wave3 {
-    animation-duration: 7s;
+    animation-duration: 9s;
     opacity: 0.3;
-    fill: rgba(74, 188, 194, 0.6);
 }
 
-
-
-/* Responsive pour mobile */
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
 @media (max-width: 768px) {
+    /* Header responsive */
     header h1 {
         font-size: 2rem;
     }
@@ -293,6 +289,13 @@ footer a:hover {
         font-size: 1rem;
     }
     
+    /* Main content responsive */
+    main {
+        padding: 1rem 0;
+        padding-bottom: 6rem;
+    }
+    
+    /* Table responsive */
     .projects-table {
         font-size: 0.9rem;
     }
@@ -302,8 +305,47 @@ footer a:hover {
         padding: 0.7rem;
     }
     
+    /* Button responsive */
     .links-cell a {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.8rem;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.7rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    /* Stats cards responsive */
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        margin-bottom: 100px;
+    }
+    
+    .stat-card {
+        padding: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Very small screens */
+    body {
+        font-size: 11px;
+    }
+    
+    header h1 {
+        font-size: 1.8rem;
+    }
+    
+    main {
+        padding: 0.5rem;
+        padding-bottom: 7rem;
+    }
+    
+    .projects-table th,
+    .projects-table td {
+        padding: 0.5rem;
+    }
+    
+    .links-cell a {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.65rem;
     }
 }

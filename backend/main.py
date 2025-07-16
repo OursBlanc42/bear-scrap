@@ -19,6 +19,7 @@ import configparser
 import re
 import time
 import traceback
+import os
 from populate_csv import save_found_posts
 from read_csv import read_csv
 
@@ -27,7 +28,10 @@ start_time = time.time()
 
 # Load configuration from config file
 config = configparser.ConfigParser()
-config.read('./config')
+# Get the directory of the current script and build the path to config
+script_dir = os.path.dirname(os.path.abspath(__file__))
+config_path = os.path.join(os.path.dirname(script_dir), 'data', 'config')
+config.read(config_path)
 email = config.get('credential', 'email')
 password = config.get('credential', 'password')
 
@@ -77,7 +81,7 @@ try:
     bearstech_url = "https://www.linkedin.com/company/bearstech/posts/"
     driver.get(f"{bearstech_url}?feedView=all")
 
-    # Wait for the page content to load 
+    # Wait for the page content to load
     wait.until(EC.presence_of_element_located((By.TAG_NAME, "main")))
     print("🌐\tSuccessfully arrived on the BearsTech page!")
 
@@ -92,7 +96,7 @@ try:
     expanded_count = 0
 
     while not target_post_found and scroll_count < max_scrolls:
-        print(f"🔽\t Scroll n° {scroll_count + 1}...")
+        print(f"🔽\t\tScroll n° {scroll_count + 1}...")
 
         # Unroll each post to ensure we can read the full content
         # ('... plus' button (in French))
@@ -108,12 +112,12 @@ try:
                     "arguments[0].scrollIntoView({block: 'center'});", span
                 )
 
-                time.sleep(5)
+                time.sleep(2)
 
                 span.click()
                 expanded_count += 1
 
-                time.sleep(5)
+                time.sleep(2)
 
             except Exception:
                 continue
@@ -151,7 +155,7 @@ try:
                     post_text,
                     re.IGNORECASE | re.DOTALL
                 )
-                
+
                 # If regex matches, extract the day, title, and description
                 if main_regex:
                     day = main_regex.group(1)
@@ -177,9 +181,15 @@ try:
                             'day': day,
                             'title': title,
                             'description': description,
-                            'links_project': links[0] if len(links) > 0 else None,
-                            'links_more': links[1] if len(links) > 1 else None,
-                            'links_support': links[2] if len(links) > 2 else None
+                            'links_project': (
+                                links[0] if len(links) > 0 else None
+                            ),
+                            'links_more': (
+                                links[1] if len(links) > 1 else None
+                            ),
+                            'links_support': (
+                                links[2] if len(links) > 2 else None
+                            )
                         })
                         print(f"⏺️\tFound NEW post: jour {day} - {title}")
                     else:
@@ -197,7 +207,7 @@ try:
             driver.execute_script(
                 "window.scrollTo(0, document.body.scrollHeight);"
             )
-            time.sleep(5)
+            time.sleep(2)
             scroll_count += 1
 
     if target_post_found:

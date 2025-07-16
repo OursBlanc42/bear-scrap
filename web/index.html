@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <header>
         <div>
             <h1>🏖️ Les Logiciels Libres de l'été</h1>
@@ -32,7 +33,7 @@
                             </tr>
                         </thead>
                         <tbody id="projectsGrid">
-                            <!-- Les projets seront chargés dynamiquement ici -->
+                            <!-- project will be loaded dynamically here -->
                         </tbody>
                     </table>
                 </div>
@@ -53,17 +54,21 @@
             </section>
         </div>
     </main>
-    <footer>
-        <svg viewBox="0 0 120 16">
+    
+    <footer id="footer-back">
+        <svg class="background-waves" viewBox="0 0 120 16">
             <defs>
-                <path id="wave" d="M 0,10 C 30,10 30,15 60,15 90,15 90,10 120,10 150,10 150,15 180,15 210,15 210,10 240,10 v 28 h -240 z" />
+                <path id="wave-path" d="M 0,10 C 30,10 30,15 60,15 90,15 90,10 120,10 150,10 150,15 180,15 210,15 210,10 240,10 v 28 h -240 z" />
             </defs>
-
-            <use id="wave3" class="wave" xlink:href="#wave" x="0" y="-2" ></use> 
-            <use id="wave2" class="wave" xlink:href="#wave" x="0" y="0" ></use>
-            <use id="wave1" class="wave" xlink:href="#wave" x="0" y="1" />
+            <use id="wave3" class="wave" xlink:href="#wave-path" x="0" y="-2" ></use> 
+            <use id="wave2" class="wave" xlink:href="#wave-path" x="0" y="0" ></use>
         </svg>
-
+    </footer>
+    <footer id="footer-front">
+        <svg class="foreground-wave" viewBox="0 0 120 16">
+            <use id="wave0" class="wave" xlink:href="#wave-path" x="0" y="1" />
+            <use id="wave1" class="wave" xlink:href="#wave-path" x="0" y="3" ></use>
+        </svg>
         <div class="footer-content">
             <p>Made with ❤️ by <a href="https://github.com/OursBlanc42">OursBlanc</a></p>
         </div>
