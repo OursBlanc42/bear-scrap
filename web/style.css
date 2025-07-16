@@ -1,0 +1,351 @@
+/* ==========================================================================
+   VARIABLES CSS
+   ========================================================================== */
+:root {
+    --primary-color: #ff6b6b;
+    --secondary-color: rgb(74, 188, 194);
+    --background-color: #fff8e1;
+    --text-color: #333;
+    --card-background-color: #f9f9f9;
+    --light-color: #fff;
+    --border-color: #c1c1c1;
+}
+
+/* ==========================================================================
+   BASE STYLES
+   ========================================================================== */
+body {
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+header {
+    background-color: var(--secondary-color);
+    padding: 2rem 0;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 0 0 1000px 1000px / 0 0 25px 25px;
+}
+
+header div {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-bottom: 2rem;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    color: var(--light-color);
+}
+
+header p {
+    margin: 0.5rem 0 0 0;
+    color: var(--light-color);
+    font-size: 1.2rem;
+}
+
+/* ==========================================================================
+   MAIN CONTENT
+   ========================================================================== */
+main {
+    padding: 2rem 0;
+    max-width: 800px;
+    margin: 0 auto;
+    min-height: 60vh;
+    padding-bottom: 5rem;
+    position: relative;
+    z-index: 2;
+}
+
+section {
+    margin-bottom: 2rem;
+}
+
+section h2 {
+    color: var(--secondary-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+}
+
+/* ==========================================================================
+   LINKS
+   ========================================================================== */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   TABLE STYLES
+   ========================================================================== */
+.table-container {
+    overflow-x: auto;
+    margin-bottom: 2rem;
+}
+
+.projects-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--card-background-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.projects-table th {
+    background-color: var(--secondary-color);
+    color: var(--light-color);
+    padding: 1rem;
+    text-align: left;
+    font-weight: bold;
+}
+
+.projects-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: top;
+}
+
+.day-cell {
+    font-weight: bold;
+    color: var(--secondary-color);
+    white-space: nowrap;
+}
+
+.title-cell {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.description-cell {
+    line-height: 1.4;
+}
+
+/* ==========================================================================
+   BUTTON STYLES (liens dans le tableau)
+   ========================================================================== */
+.links-cell a {
+    display: inline-block;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 0.3rem 0.6rem;
+    color: var(--light-color);
+    text-decoration: none;
+    border-radius: 25px;
+    background-color: var(--secondary-color);
+    transition: 0.3s ease;
+    font-weight: 300;
+    font-size: 0.75rem;
+    opacity: 0.9;
+    white-space: nowrap;
+}
+
+.links-cell a:hover {
+    opacity: 1;
+    background: rgba(255, 107, 107, 0.8);
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   STATISTICS CARDS
+   ========================================================================== */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 80px;
+}
+
+.stat-card {
+    background-color: var(--card-background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.stat-card h3 {
+    margin-top: 0;
+    color: var(--secondary-color);
+}
+
+/* ==========================================================================
+   FOOTER & WAVES
+   ========================================================================== */
+
+/* Footer avec vagues arrière-plan */
+#footer-back {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 40px;
+    z-index: 1;
+}
+
+/* Footer avec vague avant et contenu */
+#footer-front {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    pointer-events: none;
+}
+
+footer svg {
+    width: 100%;
+    height: auto;
+    pointer-events: none;
+    display: block;
+    margin: 0;
+}
+
+.footer-content {
+    background-color: var(--secondary-color);
+    padding: 10px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--light-color);
+    text-align: center;
+    pointer-events: auto;
+    margin: 0;
+}
+
+.footer-content a {
+    color: var(--primary-color);
+    background-color: var(--light-color);
+    padding: 0.2rem 0.4rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.4s ease;
+}
+
+.footer-content a:hover {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    transform: translateY(-4px);
+}
+
+/* ==========================================================================
+   ANIMATIONS
+   ========================================================================== */
+@keyframes wave {
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.wave {
+    animation: wave 4s linear infinite;
+    fill: var(--secondary-color);
+}
+
+#wave0 {
+    fill: var(--secondary-color);
+}
+
+#wave1 {
+    animation-duration: 5s;
+    animation-direction: reverse;
+    opacity: 0.5;
+}
+
+#wave2 {
+    animation-duration: 7s;
+    animation-direction: reverse;
+    opacity: 0.6;
+}
+
+#wave3 {
+    animation-duration: 9s;
+    opacity: 0.3;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+@media (max-width: 768px) {
+    /* Header responsive */
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    header p {
+        font-size: 1rem;
+    }
+    
+    /* Main content responsive */
+    main {
+        padding: 1rem 0;
+        padding-bottom: 6rem;
+    }
+    
+    /* Table responsive */
+    .projects-table {
+        font-size: 0.9rem;
+    }
+    
+    .projects-table th,
+    .projects-table td {
+        padding: 0.7rem;
+    }
+    
+    /* Button responsive */
+    .links-cell a {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.7rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    /* Stats cards responsive */
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        margin-bottom: 100px;
+    }
+    
+    .stat-card {
+        padding: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Very small screens */
+    body {
+        font-size: 11px;
+    }
+    
+    header h1 {
+        font-size: 1.8rem;
+    }
+    
+    main {
+        padding: 0.5rem;
+        padding-bottom: 7rem;
+    }
+    
+    .projects-table th,
+    .projects-table td {
+        padding: 0.5rem;
+    }
+    
+    .links-cell a {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.65rem;
+    }
+}
