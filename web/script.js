@@ -106,10 +106,9 @@ async function loadLastUpdateDate() {
   try {
     const response = await fetch("../data/last_update.txt");
     if (response.ok) {
-      const lastUpdateText = await response.text().trim();
-      document.getElementById("lastUpdate").textContent = lastUpdateText;
+      const lastUpdateText = await response.text();
+      document.getElementById("lastUpdate").textContent = lastUpdateText.trim();
     } else {
-      // Fallback si le fichier n'existe pas encore
       document.getElementById("lastUpdate").textContent =
         "Données non disponibles";
     }
