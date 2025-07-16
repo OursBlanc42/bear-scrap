@@ -95,7 +95,7 @@ function parseCSV(csvText) {
 function updateStats(projects) {
   const totalProjects = projects.length;
 
-  // Mettre à jour le nombre de logiciels
+  // Update the number of projects
   document.getElementById("totalProjects").textContent = totalProjects;
 
   // Mettre à jour la date de dernière mise à jour depuis le fichier
