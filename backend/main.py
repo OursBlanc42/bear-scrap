@@ -113,12 +113,12 @@ try:
                     "arguments[0].scrollIntoView({block: 'center'});", span
                 )
 
-                time.sleep(1)
+                time.sleep(4)
 
                 span.click()
                 expanded_count += 1
 
-                time.sleep(1)
+                time.sleep(4)
 
             except Exception:
                 continue
