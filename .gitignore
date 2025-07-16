@@ -209,3 +209,6 @@ __marimo__/
 # Config file with credential
 config
 
+# virtual environnement
+venv/
+

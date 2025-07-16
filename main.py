@@ -92,7 +92,7 @@ try:
     expanded_count = 0
 
     while not target_post_found and scroll_count < max_scrolls:
-        print(f"🔽\tScroll {scroll_count + 1}...")
+        print(f"🔽\t Scroll n° {scroll_count + 1}...")
 
         # Unroll each post to ensure we can read the full content
         # ('... plus' button (in French))
@@ -138,13 +138,13 @@ try:
             try:
                 post_text = post.text
 
-                # Vérifier si c'est le post cible
-                if "Les Logiciels Libres de l'été, jour 19 :" in post_text:
+                # Check if it's the target post (day 1)
+                if "Les Logiciels Libres de l'été, jour 1 :" in post_text:
                     print("🎯\tFound target post: " +
                           "'Les Logiciels Libres de l'été, jour 1 :'")
                     target_post_found = True
 
-                # Appliquer le regex pour les posts qui nous intéressent
+                # Apply regex for the posts we're interested in
                 main_regex = re.search(
                     r"jour\s*(\d{1,2})\s*[:\-–]?\s*\n*([^:]+)\s*:\s*(.+?)"
                     r"(?:\n|$)",
@@ -152,11 +152,11 @@ try:
                     re.IGNORECASE | re.DOTALL
                 )
                 
-                # If regex matches, extract the day, title, and content
+                # If regex matches, extract the day, title, and description
                 if main_regex:
                     day = main_regex.group(1)
                     title = main_regex.group(2).strip()
-                    content = main_regex.group(3).strip()
+                    description = main_regex.group(3).strip()
 
                     # Check if we already know this post (by day)
                     # Then add it if it's new or ignore it if known
@@ -174,11 +174,12 @@ try:
 
                         found_posts.append({
                             'text': post_text,
-                            'regex_match': main_regex.group(0),
                             'day': day,
                             'title': title,
-                            'content': content,
-                            'links': links
+                            'description': description,
+                            'links_project': links[0] if len(links) > 0 else None,
+                            'links_more': links[1] if len(links) > 1 else None,
+                            'links_support': links[2] if len(links) > 2 else None
                         })
                         print(f"⏺️\tFound NEW post: jour {day} - {title}")
                     else:

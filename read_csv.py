@@ -12,15 +12,16 @@ import csv
 
 def read_csv():
     # Read found posts from a CSV file and return a set of known days
-
     known_posts = set()
 
+    # Try to read the CSV file then check if it exists
+    # If it does, read the 'day' field from each row and add it to the set
     try:
         with open("list.csv", "r") as f:
             reader = csv.reader(f)
             for row in reader:
-                if len(row) >= 4:  # Ensure row has enough columns
-                    known_posts.add(row[0])  # Add day to set
+                if len(row) >= 1:
+                    known_posts.add(row[0])
     except FileNotFoundError:
         print("📄\tNo existing CSV file found, starting fresh...")
 

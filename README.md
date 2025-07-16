@@ -27,6 +27,11 @@ then launch the index.html and "voila" you have a webpage with nice formating
 I've self hosted the project here, with a cron task, i schedule each day at 1:00 the scan of linkedin to continuously populate the page
 
 
+## Disclaimer
+Apparently, linkedin n'aime pas trop qu'on fasse plein de requete comme ça, donc il faut utiliser ça avec parcimonie. Vu que l'on se log avec un compte utilisateur je pense qu'il y a un risque de se faire perma-ban.
+
+
+
 ## Improvement
 La logique algorithmique peut certainement être amélioré (j'ai essayé d'optimiser ça mais j'ai pas réussi à trouver un moyen de limiter le nombre de boucle avec Selenium qui rescan tous les posts à chaque fois... Dans l'idéal il faudrait scanner que les nouveaux poste une fois qu'on a scrollé et afficher de nouvelles publications
 
