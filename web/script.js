@@ -67,7 +67,7 @@ function parseCSV(csvText) {
       .map((line) => {
         // Simple parsing
         const parts = line.split(",");
-        if (parts.length < 5) return null; // Il faut au moins 5 colonnes (jour, titre, description, 3 liens)
+        if (parts.length < 5) return null; // At least 5 columns are required (day, title, description, 3 links)
 
         const day = parts[0].trim();
         const title = parts[1].trim();
