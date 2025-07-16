@@ -41,3 +41,6 @@ La logique algorithmique peut certainement être amélioré (j'ai essayé d'opti
 ## Made with love
 I made this myself with my bear paws. It's a small personal project to populate my GitHub and help in my job search.
 
+## Remerciements
+https://codepen.io/uchardon/pen/bxbqoG/ pour le footer "vague" que j'ai repimpé à ma sauce derriere
+
