@@ -4,8 +4,8 @@ async function loadProjects() {
   const projectsGrid = document.getElementById("projectsGrid");
 
   try {
-    // Load the CSV data
-    const response = await fetch("../data/list.csv");
+    // Load data from CSV
+    const response = await fetch("list.csv");
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -104,7 +104,7 @@ function updateStats(projects) {
 
 async function loadLastUpdateDate() {
   try {
-    const response = await fetch("../data/last_update.txt");
+    const response = await fetch("last_update.txt");
     if (response.ok) {
       const lastUpdateText = await response.text();
       document.getElementById("lastUpdate").textContent = lastUpdateText.trim();

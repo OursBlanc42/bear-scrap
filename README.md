@@ -26,7 +26,7 @@ I wanted to use an API to scrape posts from the Bearstech page, but it seems it'
 
 The operation is quite simple:
 
-- There is a **CSV file** (`data/list.csv`) that records the posts from the Bearstech page
+- There is a **CSV file** (`web/list.csv`) that records the posts from the Bearstech page
 - Given that there normally won't be a huge number of entries, I preferred using a `.csv` over a real database
 
 ### Project Structure
@@ -37,14 +37,14 @@ bear-scrap/
 │   ├── main.py          # Main scraping script
 │   ├── populate_csv.py  # CSV population functions
 │   ├── read_csv.py      # CSV reading functions
-│   └── server.py        # Local development server
-├── data/                # Data files
-│   ├── list.csv        # Scraped projects data
-│   └── config          # LinkedIn credentials
-├── web/                 # Frontend files
+│   ├── server.py        # Local development server
+│   └── config           # LinkedIn credentials
+├── web/                 # Frontend files & data
 │   ├── index.html      # Main page
 │   ├── script.js       # JavaScript functionality
 │   ├── style.css       # Styling
+│   ├── list.csv        # Scraped projects data
+│   ├── last_update.txt # Last update timestamp
 │   └── assets/         # Images and resources
 ├── docs/                # Documentation
 │   └── screenshot.png  # Project screenshot
@@ -53,15 +53,15 @@ bear-scrap/
 
 ### Process flow:
 
-1. **Login**: We log in to LinkedIn using the credentials contained in the data/config file
+1. **Login**: We log in to LinkedIn using the credentials contained in the backend/config file
 2. **Navigate**: Go to the Bearstech page and scroll through the posts
 3. **Identify**: When we find a post titled _"Les logiciels libres de l'été"_, we expand it
 4. **Extract**: Scrape the post content using a regex pattern
 5. **Filter**: Skip posts that are already in the `.csv` file
 6. **Stop condition**: Once we reach _"Logiciel de l'été jour 1"_ (the first one), we stop
-7. **Save**: Store all new entries in the `.csv` file
+7. **Save**: Store all new entries in the `web/list.csv` file
 
-Then everything is shown in a nice website with JS to make DOM
+The timestamp of the last update is also saved in `web/last_update.txt` for display on the website.
 
 ## Installation
 
@@ -86,10 +86,10 @@ Then everything is shown in a nice website with JS to make DOM
    pip install -r requirements.txt
    ```
 
-3. **Edit** data/config file with your credentials
+3. **Edit** backend/config file with your credentials
 
    ```bash
-   nano data/config
+   nano backend/config
    # Add your LinkedIn credentials:
    # [credential]
    # email = your-email@example.com
@@ -104,7 +104,7 @@ Then everything is shown in a nice website with JS to make DOM
 
 5. **Wait** a few minutes
 
-After that, the script has populated the `.csv` and you have your list in the `.csv` file!
+After that, the script has populated the `web/list.csv` and you have your list in the CSV file!
 
 ### Local testing
 
@@ -120,7 +120,7 @@ Then open your browser and go to [http://localhost:8000/web/](http://localhost:8
 
 The project is self-hosted on my **Helios64** server. Using **Caddy** as a web server.
 
-- **Automated updates**: A cron job runs daily at 1:00 AM to scan LinkedIn and keep the page continuously updated with new software releases
+- **Automated updates**: A cron job runs daily at 4:00 AM to scan LinkedIn and keep the page continuously updated with new software releases
 - **Live demo**: [bearscrap.nanuq.me](https://bearscrap.nanuq.me)
 
 ## Disclaimer
