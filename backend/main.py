@@ -22,6 +22,7 @@ import traceback
 import os
 from populate_csv import save_found_posts
 from read_csv import read_csv
+from datetime import datetime
 
 # Execution time calculation
 start_time = time.time()
@@ -112,12 +113,12 @@ try:
                     "arguments[0].scrollIntoView({block: 'center'});", span
                 )
 
-                time.sleep(2)
+                time.sleep(1)
 
                 span.click()
                 expanded_count += 1
 
-                time.sleep(2)
+                time.sleep(1)
 
             except Exception:
                 continue
@@ -237,3 +238,9 @@ finally:
     # Calculate and print execution time
     execution_time = time.time() - start_time
     print(f"⏱️\tExecution time: {execution_time:.2f} seconds")
+
+    # Write the timestamp in a file
+    timestamp_path = os.path.join(
+        os.path.dirname(script_dir), 'data', 'last_update.txt')
+    with open(timestamp_path, "w") as f:
+        f.write(datetime.now().strftime("%d-%m-%Y %H:%M:%S"))

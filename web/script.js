@@ -98,13 +98,26 @@ function updateStats(projects) {
   // Mettre à jour le nombre de logiciels
   document.getElementById("totalProjects").textContent = totalProjects;
 
-  // Mettre à jour la date de dernière mise à jour
-  const now = new Date();
-  const lastUpdate = now.toLocaleDateString("fr-FR", {
-    day: "numeric",
-    month: "long",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-  document.getElementById("lastUpdate").textContent = lastUpdate;
+  // Mettre à jour la date de dernière mise à jour depuis le fichier
+  loadLastUpdateDate();
+}
+
+async function loadLastUpdateDate() {
+  try {
+    const response = await fetch("../data/last_update.txt");
+    if (response.ok) {
+      const lastUpdateText = await response.text().trim();
+      document.getElementById("lastUpdate").textContent = lastUpdateText;
+    } else {
+      // Fallback si le fichier n'existe pas encore
+      document.getElementById("lastUpdate").textContent =
+        "Données non disponibles";
+    }
+  } catch (error) {
+    console.error(
+      "Erreur lors du chargement de la date de mise à jour:",
+      error
+    );
+    document.getElementById("lastUpdate").textContent = "Erreur de chargement";
+  }
 }
