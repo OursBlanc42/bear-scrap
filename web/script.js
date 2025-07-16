@@ -4,7 +4,7 @@ async function loadProjects() {
   const projectsGrid = document.getElementById("projectsGrid");
 
   try {
-    // Charger les données du CSV
+    // Load data from CSV
     const response = await fetch("list.csv");
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -13,7 +13,7 @@ async function loadProjects() {
     const csvText = await response.text();
     const projects = parseCSV(csvText);
 
-    // Afficher les projets
+    // Display the projects
     projectsGrid.innerHTML = projects
       .map(
         (project) => `
@@ -67,7 +67,7 @@ function parseCSV(csvText) {
       .map((line) => {
         // Simple parsing
         const parts = line.split(",");
-        if (parts.length < 5) return null; // Il faut au moins 5 colonnes (jour, titre, description, 3 liens)
+        if (parts.length < 5) return null; // At least 5 columns are required (day, title, description, 3 links)
 
         const day = parts[0].trim();
         const title = parts[1].trim();
@@ -95,10 +95,10 @@ function parseCSV(csvText) {
 function updateStats(projects) {
   const totalProjects = projects.length;
 
-  // Mettre à jour le nombre de logiciels
+  // Update the number of projects
   document.getElementById("totalProjects").textContent = totalProjects;
 
-  // Mettre à jour la date de dernière mise à jour depuis le fichier
+  // Update the last update date from the file
   loadLastUpdateDate();
 }
 

@@ -18,11 +18,11 @@ def main():
     try:
         with socketserver.TCPServer(("", port), handler) as httpd:
             print(f"Serveur démarré sur http://localhost:{port}")
-            print(f"Accédez à http://localhost:{port}/web/ pour voir le site")
-            print("Appuyez sur Ctrl+C pour arrêter le serveur")
+            print(f"Access http://localhost:{port}/web/ to view the site")
+            print("Press Ctrl+C to stop the server")
             httpd.serve_forever()
     except KeyboardInterrupt:
-        print("\nServeur arrêté.")
+        print("\nServer stopped.")
         sys.exit(0)
 
 

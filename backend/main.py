@@ -203,7 +203,7 @@ try:
         print(f"🔎\tFound {new_posts_count} new posts in this scroll")
 
         if not target_post_found:
-            # Scroller vers le bas pour charger plus de contenu
+            # Scroll down to load more content
             print("🔽\tScrolling down to load more posts...")
             driver.execute_script(
                 "window.scrollTo(0, document.body.scrollHeight);"
