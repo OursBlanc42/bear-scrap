@@ -1,6 +1,26 @@
 # Bear-Scrap
 
-## Summary
+## Table of Contents
+
+- [Live demo](#live-demo)
+- [Screenshot](#screenshot)
+- [Presentation](#presentation)
+- [Idea](#idea)
+- [How it works?](#how-it-works)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+  - [Requirements](#requirements)
+  - [Populate the CSV](#populate-the-csv)
+  - [Local testing](#local-testing)
+- [Deployment & Infrastructure](#deployment--infrastructure)
+- [Disclaimer](#disclaimer)
+- [Improvements](#improvements)
+- [License](#license)
+- [Made with love](#made-with-love)
+- [Acknowledgments](#acknowledgments)
+
+
+
 
 ## Live demo
 
@@ -120,7 +140,13 @@ Then open your browser and go to [http://localhost:8000/web/](http://localhost:8
 
 The project is self-hosted on my **Helios64** server. Using **Caddy** as a web server.
 
-- **Automated updates**: A cron job runs daily at 4:00 AM to scan LinkedIn and keep the page continuously updated with new software releases
+- **Automated updates**: A cron job runs daily at 3:00 AM to scan LinkedIn and keep the page continuously updated with new software releases.
+Example of my cron job :
+     ```bash
+      0 3 * * * cd /data/caddy/website/bearscrap && \
+      . venv/bin/activate && \
+      /usr/bin/python3 backend/main.py >> /data/caddy/website/bearscrap/cron.log 2>&1
+     ```
 - **Live demo**: [bearscrap.nanuq.me](https://bearscrap.nanuq.me)
 
 ## Disclaimer
