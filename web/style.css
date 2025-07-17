@@ -67,6 +67,7 @@ header a:hover {
     background-color: var(--primary-color);
     color: var(--light-color);
     transform: translateY(-4px);
+    text-decoration:none;
 }
 
 /* ==========================================================================
@@ -151,7 +152,7 @@ a:hover {
 }
 
 /* ==========================================================================
-   BUTTON STYLES (liens dans le tableau)
+   BUTTON STYLES (links in table)
    ========================================================================== */
 .links-cell a {
     display: inline-block;
