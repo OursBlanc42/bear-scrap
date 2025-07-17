@@ -67,7 +67,7 @@ header a:hover {
     background-color: var(--primary-color);
     color: var(--light-color);
     transform: translateY(-4px);
-    text-decoration:none;
+    text-decoration: none;
 }
 
 /* ==========================================================================
