@@ -19,9 +19,6 @@
 - [Made with love](#made-with-love)
 - [Acknowledgments](#acknowledgments)
 
-
-
-
 ## Live demo
 
 Self-hosted page : [bearscrap.nanuq.me](https://bearscrap.nanuq.me)
@@ -106,14 +103,13 @@ The timestamp of the last update is also saved in `web/last_update.txt` for disp
    pip install -r requirements.txt
    ```
 
-3. **Edit** backend/config file with your credentials
+3. **Create and Edit** backend/.env file with your credentials
 
    ```bash
-   nano backend/config
-   # Add your LinkedIn credentials:
-   # [credential]
-   # email = your-email@example.com
-   # password = your-password
+   cp backend/.env.example backend/.env
+   nano backend/.env
+   # LINKEDIN_EMAIL=your-email@example.com
+   # LINKEDIN_PASSWORD=your-password
    ```
 
 4. **Launch** the script
@@ -141,12 +137,12 @@ Then open your browser and go to [http://localhost:8000/web/](http://localhost:8
 The project is self-hosted on my **Helios64** server. Using **Caddy** as a web server.
 
 - **Automated updates**: A cron job runs daily at 3:00 AM to scan LinkedIn and keep the page continuously updated with new software releases.
-Example of my cron job :
-     ```bash
+  Example of my cron job :
+  `bash
       0 3 * * * cd /data/caddy/website/bearscrap && \
       . venv/bin/activate && \
       /usr/bin/python3 backend/main.py >> /data/caddy/website/bearscrap/cron.log 2>&1
-     ```
+     `
 - **Live demo**: [bearscrap.nanuq.me](https://bearscrap.nanuq.me)
 
 ## Disclaimer

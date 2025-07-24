@@ -23,6 +23,8 @@ import os
 from populate_csv import save_found_posts
 from read_csv import read_csv
 from datetime import datetime
+from dotenv import load_dotenv
+
 
 # Execution time calculation
 start_time = time.time()
@@ -31,10 +33,11 @@ start_time = time.time()
 config = configparser.ConfigParser()
 # Get the directory of the current script and build the path to config
 script_dir = os.path.dirname(os.path.abspath(__file__))
-config_path = os.path.join(script_dir, 'config')
-config.read(config_path)
-email = config.get('credential', 'email')
-password = config.get('credential', 'password')
+
+# Load environment variables from .env file
+load_dotenv(dotenv_path=os.path.join(script_dir, '.env'))
+email = os.getenv('LINKEDIN_EMAIL')
+password = os.getenv('LINKEDIN_PASSWORD')
 
 options = Options()
 options.add_argument("--headless")
