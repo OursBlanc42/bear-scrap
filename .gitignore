@@ -215,6 +215,7 @@ venv/
 # Project-specific files
 geckodriver.log
 *.csv
+*.rss
 
 
 # Selenium/WebDriver logs

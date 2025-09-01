@@ -21,6 +21,7 @@ import time
 import traceback
 import os
 from populate_csv import save_found_posts
+from populate_rss import save_found_posts_in_rss
 from read_csv import read_csv
 from datetime import datetime
 from dotenv import load_dotenv
@@ -226,6 +227,7 @@ try:
     if len(found_posts) > 0:
         print("💾\tSaving found posts to CSV file...")
         save_found_posts(found_posts)
+        save_found_posts_in_rss(found_posts)
     else:
         print("❌\tNo posts to save")
 

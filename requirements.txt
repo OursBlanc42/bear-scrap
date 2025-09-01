@@ -1,2 +1,3 @@
 selenium==4.10.0
 python-dotenv==1.1.1
+rfeed==1.1.1
