@@ -3,9 +3,19 @@ document.addEventListener("DOMContentLoaded", loadProjects);
 async function loadProjects() {
   const projectsGrid = document.getElementById("projectsGrid");
 
+  if (window.location.protocol === "file:") {
+    console.warn(
+      "Le chargement du CSV depuis file:// n'est pas pris en charge par le navigateur. Servez la page via un serveur local."
+    );
+    projectsGrid.innerHTML =
+      "<tr><td colspan='4'>Ouvrez cette page via un serveur local pour charger les données (ex. python3 backend/server.py).</td></tr>";
+    return;
+  }
+
   try {
     // Load data from CSV
-    const response = await fetch("list.csv");
+    const csvUrl = new URL("./lists/list2025.csv", window.location.href);
+    const response = await fetch(csvUrl);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -104,7 +114,8 @@ function updateStats(projects) {
 
 async function loadLastUpdateDate() {
   try {
-    const response = await fetch("last_update.txt");
+    const lastUpdateUrl = new URL("./last_update.txt", window.location.href);
+    const response = await fetch(lastUpdateUrl);
     if (response.ok) {
       const lastUpdateText = await response.text();
       document.getElementById("lastUpdate").textContent = lastUpdateText.trim();
