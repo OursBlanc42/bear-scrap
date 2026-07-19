@@ -138,6 +138,7 @@ Then open your browser and go to [http://localhost:8000/web/](http://localhost:8
 ## Deployment & Infrastructure
 
 The project is self-hosted on my **Helios64** server. Using **Caddy** as a web server.
+This machine is at my place behind my couch and might be "down" when it gets really hot. Sorry about that !
 
 - **Automated updates**: A cron job runs daily at 3:00 AM to scan LinkedIn and keep the page continuously updated with new software releases.
   Example of my cron job :
