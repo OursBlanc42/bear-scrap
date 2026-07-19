@@ -56,21 +56,39 @@ try:
     wait = WebDriverWait(driver, 10)
 
     # Find and fill email field
-    print("✉️\tFilling the email field...")
+    print("✉️\tFilling the email field...", end="")
     email_field = wait.until(
-        EC.presence_of_element_located((By.ID, "username"))
+        EC.visibility_of_element_located(
+            (By.CSS_SELECTOR, "input[type='email'][autocomplete='username webauthn']")
+        )
     )
     email_field.send_keys(email)
+    print(" DONE!")
 
-    # Find and fill password field
-    print("🔑\tFilling the password field...")
-    password_field = driver.find_element(By.ID, "password")
+    print("🔑\tFilling the password field...", end="")
+    password_field = next(
+        el for el in driver.find_elements(By.CSS_SELECTOR, "input[type='password'][autocomplete='current-password']")
+        if el.is_displayed()
+    )
     password_field.send_keys(password)
+    print(" DONE!")
 
     # Find and click login button
-    print("🔓\tClicking the login button...")
-    login_button = driver.find_element(By.XPATH, "//button[@type='submit']")
+    def find_visible(by, selector):
+        for el in driver.find_elements(by, selector):
+            if el.is_displayed():
+                return el
+        raise Exception(f"Aucun élément visible pour: {selector}")
+
+    print("🔓\tClicking the login button...", end="")
+    login_button = find_visible(
+        By.XPATH,
+        "//button[@type='button' and not(@aria-label) and not(.//figure)]"
+    )
     login_button.click()
+    print(" DONE!")
+
+    time.sleep(3)
 
     # Wait for login to complete (wait for redirect or main page element)
     print("⏳\tWaiting for login to complete...")
@@ -146,11 +164,17 @@ try:
             try:
                 post_text = post.text
 
+                TARGET_PATTERN = re.compile(
+                    r"[Ll]es Logiciels Libres de l['’]été,?\s*[Jj]our\s*1(?!\d)"
+                )
+
                 # Check if it's the target post (day 1)
-                if "Les Logiciels Libres de l'été, jour 1 :" in post_text:
+                if TARGET_PATTERN.search(post_text):
                     print("🎯\tFound target post: " +
-                          "'Les Logiciels Libres de l'été, jour 1 :'")
+                        "'Les Logiciels Libres de l'été, jour 1'")
                     target_post_found = True
+
+
 
                 # Apply regex for the posts we're interested in
                 main_regex = re.search(

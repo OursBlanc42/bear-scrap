@@ -9,7 +9,16 @@ Returns:
 
 import csv
 import os
+from datetime import date
 
+def find_current_year():
+    # Find current year to generate one csv by year
+    current_year = date.today().year
+    return current_year
+
+def save_found_posts(posts):
+    # Save found posts to the CSV file
+    script_dir = os.path.dirname(os.path.abspath(__file__))
 
 def read_csv():
     # Read found posts from a CSV file and return a set of known days
@@ -20,8 +29,8 @@ def read_csv():
     try:
         # Get the directory of the current script and build the path to CSV
         script_dir = os.path.dirname(os.path.abspath(__file__))
-        csv_path = os.path.join(
-            os.path.dirname(script_dir), 'web', 'list.csv')
+        year = find_current_year()
+        csv_path = os.path.join(os.path.dirname(script_dir), 'web', 'lists', f'list{year}.csv')
 
         with open(csv_path, "r") as f:
             reader = csv.reader(f)

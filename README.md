@@ -60,7 +60,9 @@ bear-scrap/
 │   ├── index.html      # Main page
 │   ├── script.js       # JavaScript functionality
 │   ├── style.css       # Styling
-│   ├── list.csv        # Scraped projects data
+│   ├── lists # Directory with list for each year
+│   │   ├── list2025.csv
+│   │   └── list2026.csv
 │   ├── last_update.txt # Last update timestamp
 │   └── assets/         # Images and resources
 ├── docs/                # Documentation
@@ -98,6 +100,7 @@ The timestamp of the last update is also saved in `web/last_update.txt` for disp
    ```
 
 2. **Set up** the environment
+(Tips : create a venv if necessary)
 
    ```bash
    pip install -r requirements.txt
@@ -135,6 +138,7 @@ Then open your browser and go to [http://localhost:8000/web/](http://localhost:8
 ## Deployment & Infrastructure
 
 The project is self-hosted on my **Helios64** server. Using **Caddy** as a web server.
+This machine is at my place behind my couch and might be "down" when it gets really hot. Sorry about that !
 
 - **Automated updates**: A cron job runs daily at 3:00 AM to scan LinkedIn and keep the page continuously updated with new software releases.
   Example of my cron job :
@@ -155,6 +159,8 @@ Apparently, LinkedIn doesn't really like it when you make a lot of requests like
 - Minor improvements
 - Refactorize code
 - Optimize execution time of main.py
+- Optimize the logic to automate creation of .CSV for each year
+- Optimize to have a single JS script 
 - Dockerize
 
 ## License

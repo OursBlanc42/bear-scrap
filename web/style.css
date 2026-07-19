@@ -9,6 +9,7 @@
     --card-background-color: #f9f9f9;
     --light-color: #fff;
     --border-color: #c1c1c1;
+    --title-cell-color: #28777B;
 }
 
 /* ==========================================================================
@@ -144,7 +145,7 @@ a:hover {
 
 .title-cell {
     font-weight: bold;
-    color: var(--primary-color);
+    color: var(--title-cell-color);
 }
 
 .description-cell {
