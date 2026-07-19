@@ -60,7 +60,9 @@ bear-scrap/
 │   ├── index.html      # Main page
 │   ├── script.js       # JavaScript functionality
 │   ├── style.css       # Styling
-│   ├── list.csv        # Scraped projects data
+│   ├── lists # Directory with list for each year
+│   │   ├── list2025.csv
+│   │   └── list2026.csv
 │   ├── last_update.txt # Last update timestamp
 │   └── assets/         # Images and resources
 ├── docs/                # Documentation
@@ -98,6 +100,7 @@ The timestamp of the last update is also saved in `web/last_update.txt` for disp
    ```
 
 2. **Set up** the environment
+(Tips : create a venv if necessary)
 
    ```bash
    pip install -r requirements.txt
