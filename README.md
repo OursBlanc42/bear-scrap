@@ -158,6 +158,8 @@ Apparently, LinkedIn doesn't really like it when you make a lot of requests like
 - Minor improvements
 - Refactorize code
 - Optimize execution time of main.py
+- Optimize the logic to automate creation of .CSV for each year
+- Optimize to have a single JS script 
 - Dockerize
 
 ## License
